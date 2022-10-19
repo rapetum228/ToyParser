@@ -2,7 +2,6 @@
 using CsvHelper.Configuration;
 using System.Collections.Concurrent;
 using System.Globalization;
-using System.IO;
 using System.Text;
 using ToyParser.Core.Data;
 

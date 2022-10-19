@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using ToyParser.Core.Csv;
+﻿using ToyParser.Core.Csv;
 using ToyParser.Core.Documents;
 using ToyParser.Core.Parsing;
 using ToyParser.Core.Parsing.ToyProperties;

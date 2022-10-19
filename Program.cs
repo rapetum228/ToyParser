@@ -1,20 +1,15 @@
-﻿using AngleSharp.Html.Dom;
-using AngleSharp.Io;
-using AngleSharp;
-using System.Text;
+﻿using System.Text;
 using ToyParser.Core;
-using AngleSharp.Js;
 
 EncodingProvider ppp = CodePagesEncodingProvider.Instance;
 Encoding.RegisterProvider(ppp);
 
-//if (!File.Exists("./data.csv"))
-//{
-//    File.Create("./data.csv");
-//    Console.WriteLine("FIle created");
-//}
+if (File.Exists("./data.csv"))
+{
+    File.Delete("./data.csv");
+}
 
-//ToyParserWorker worker = new ToyParserWorker();
-//Console.WriteLine(DateTime.Now);
-//await worker.Start();
-//Console.ReadLine();
+ToyParserWorker worker = new ToyParserWorker();
+Console.WriteLine(DateTime.Now);
+await worker.Start();
+Console.ReadLine();

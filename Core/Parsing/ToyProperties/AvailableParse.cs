@@ -10,11 +10,10 @@ namespace ToyParser.Core.Parsing
         {
             var item = htmlDocument
                 .QuerySelector("span.ok");
-                //.FirstOrDefault(item => item.ClassName != null && item.ClassName.Contains("ok"));
+            //.FirstOrDefault(item => item.ClassName != null && item.ClassName.Contains("ok"));
 
             if (item is null)
             {
-                Console.WriteLine("Нет в наличии");
                 return "Нет в наличии";
             }
 

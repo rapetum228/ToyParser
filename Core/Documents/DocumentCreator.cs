@@ -1,6 +1,5 @@
 ﻿using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
-using ToyParser.Core.Documents;
 using ToyParser.Core.Url;
 
 namespace ToyParser.Core.Documents

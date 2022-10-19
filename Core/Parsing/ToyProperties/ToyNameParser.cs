@@ -11,10 +11,9 @@ namespace ToyParser.Core.Parsing
         {
             var item = htmlDocument
                 .QuerySelector("h1.detail-name");
-                //.FirstOrDefault(item => item.ClassName != null && item.ClassName.Contains("detail-name"));
+            //.FirstOrDefault(item => item.ClassName != null && item.ClassName.Contains("detail-name"));
             if (item is null)
             {
-                Console.WriteLine("Название не найдено");
                 return "Название не найдено";
             }
             return item.TextContent;

@@ -8,9 +8,8 @@ namespace ToyParser.Core.Parsing
         public override Func<IHtmlDocument, string> Parse => ParseOldPrice;
         public string ParseOldPrice(IHtmlDocument htmlDocument)
         {
-            var item = htmlDocument
-                .QuerySelector("span.old-price");
-                //.FirstOrDefault(item => item.ClassName != null && item.ClassName.Equals("old-price"));
+            var item = htmlDocument.QuerySelector("span.old-price");
+
             if (item is null)
             {
                 return "Цена не менялась";

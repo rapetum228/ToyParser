@@ -14,6 +14,11 @@ namespace ToyParser.Core.Parsing
                 .QuerySelectorAll("a")
                 .Where(item => item.ClassName != null && item.ClassName.Contains("breadcrumb-item hide-mobile"));
 
+            if (items is null || items.Count() == 0)
+            {
+                return "Хлебные крошки не найдены";
+            }
+
             foreach (var item in items)
             {
                 sb.Append(item.GetAttribute("title")).Append(" > ");

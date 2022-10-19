@@ -8,12 +8,10 @@ namespace ToyParser.Core.Parsing
 
         private string ParseCurrentPrice(IHtmlDocument htmlDocument)
         {
-            var item = htmlDocument
-                .QuerySelector("span.price");
-                /*.FirstOrDefault(item => item.ClassName != null && item.ClassName.Equals("price"));*/
+            var item = htmlDocument.QuerySelector("span.price");
+
             if (item is null)
             {
-                Console.WriteLine("Цена не найдена");
                 return "Цена не найдена";
             }
 

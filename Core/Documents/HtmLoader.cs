@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Threading.Tasks;
 
 namespace ToyParser.Core.Documents
 {
@@ -32,7 +31,7 @@ namespace ToyParser.Core.Documents
                     {
                         Console.WriteLine(ex.Message);
                     }
-                    
+
                 }
 
             }

@@ -1,8 +1,8 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
-using ToyParser.Core.Csv;
 using ToyParser.Core.Data;
 using ToyParser.Core.Documents;
+using ToyParser.Core.Parsing.ToyProperties;
 using ToyParser.Core.Url;
 
 namespace ToyParser.Core.Parsing
@@ -13,12 +13,10 @@ namespace ToyParser.Core.Parsing
         private readonly IUrlDirector<string> _urlToyDirector;
         private readonly DocumentCreator<string> _toyDocumentCreator;
         private readonly AbstractParser<IEnumerable<IElement>> _parser;
-        private readonly CustomCsvWriter _customCsvWriter;
 
         public ParserHelper(HttpClient httpClient)
         {
             _urlBuilder = new UrlBuilder();
-            _customCsvWriter = new CustomCsvWriter();
             _urlToyDirector = new UrlToyDirector(_urlBuilder);
             _toyDocumentCreator = new DocumentCreator<string>(_urlToyDirector, httpClient);
             _parser = new PageParser();
@@ -38,15 +36,8 @@ namespace ToyParser.Core.Parsing
                 var toy = GetToyInformation(toyDocument);
                 toy.ProductUrl = toyUrl;
                 toy.PageNumber = numberPage;
-                //var toy = await OpenToyPage(item, numberPage);
                 list.Add(toy);
             }
-
-            //Parallel.ForEach(items, (item) =>
-            //{
-            //    var toy = OpenToyPage(item, numberPage).Result;
-            //    list.Add(toy);
-            //});
 
             return list;
         }
@@ -60,6 +51,7 @@ namespace ToyParser.Core.Parsing
             var oldPrice = new OldPriceParser().Parse.Invoke(document);
             var currentPrice = new CurrentPriceParser().Parse.Invoke(document);
             var imageUrl = new ImageUrlParse().Parse.Invoke(document);
+            var region = new RegionNameParser().Parse.Invoke(document);
 
             return new ToyInformation()
             {
@@ -68,19 +60,10 @@ namespace ToyParser.Core.Parsing
                 IsAvailable = available,
                 OldPrice = oldPrice,
                 CurrentPrice = currentPrice,
-                ImageUrl = imageUrl
+                ImageUrl = imageUrl,
+                RegionName = region,
             };
         }
 
-        private async Task<ToyInformation> OpenToyPage(IElement item, int numberPage)
-        {
-            var toyUrl = item.GetAttribute("href");
-            var toyDocument = await _toyDocumentCreator.GetDocumentForParseAsync(toyUrl);
-
-            var toy = GetToyInformation(toyDocument);
-            toy.ProductUrl = toyUrl;
-            toy.PageNumber = numberPage;
-            return toy;
-        }
     }
 }
