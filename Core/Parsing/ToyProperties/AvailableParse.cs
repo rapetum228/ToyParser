@@ -8,9 +8,7 @@ namespace ToyParser.Core.Parsing
 
         private string ParseAvailable(IHtmlDocument htmlDocument)
         {
-            var item = htmlDocument
-                .QuerySelector("span.ok");
-            //.FirstOrDefault(item => item.ClassName != null && item.ClassName.Contains("ok"));
+            var item = htmlDocument.QuerySelector("span.ok");
 
             if (item is null)
             {

@@ -9,9 +9,8 @@ namespace ToyParser.Core.Parsing
 
         private string ParseName(IHtmlDocument htmlDocument)
         {
-            var item = htmlDocument
-                .QuerySelector("h1.detail-name");
-            //.FirstOrDefault(item => item.ClassName != null && item.ClassName.Contains("detail-name"));
+            var item = htmlDocument.QuerySelector("h1.detail-name");
+
             if (item is null)
             {
                 return "Название не найдено";
