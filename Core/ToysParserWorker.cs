@@ -16,7 +16,6 @@ namespace ToyParser.Core
         public ToyParserWorker()
         {
             _httpClient = new HttpClient();
-            _httpClient.Timeout = TimeSpan.FromMinutes(10);
             _urlBuilder = new UrlBuilder();
             _urlPageDirector = new UrlPageDirector(_urlBuilder);
             _documentCreator = new DocumentCreator<int>(_urlPageDirector, _httpClient);
@@ -29,7 +28,7 @@ namespace ToyParser.Core
 
             if (document is null)
             {
-                throw new Exception("Страница не загружена");
+                throw new Exception("Страница не загружена, повторите позже");
             }
 
             ParserHelper parser = new ParserHelper(_httpClient);
@@ -46,6 +45,7 @@ namespace ToyParser.Core
             var countPages = parser.Parse.Invoke(document);
 
             Parallel.For(1, countPages + 1, WorkerAsync);
+            
         }
 
 

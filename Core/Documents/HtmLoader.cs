@@ -1,18 +1,16 @@
 ﻿using System.Net;
+using System.Net.Sockets;
 
 namespace ToyParser.Core.Documents
 {
     internal class HtmLoader
     {
         private readonly HttpClient _httpClient;
-        //private readonly string _url;
+        private readonly string _exceptionMessage = "Проблемы с соединением, попробуйте позже: ";
 
         public HtmLoader(HttpClient httpClient)
         {
-            //HttpClientHandler clientHandler = new HttpClientHandler();
-            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             _httpClient = httpClient;
-            //_url = url;
         }
 
         public async Task<string> GetSource(string url)
@@ -35,11 +33,26 @@ namespace ToyParser.Core.Documents
                 }
 
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine(_exceptionMessage + ex.Message);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(_exceptionMessage + ex.Message);
+            }
             catch (TaskCanceledException ex)
+            {
+                Console.WriteLine(_exceptionMessage + ex.Message);
+            }
+            catch (SocketException ex)
+            {
+                Console.WriteLine(_exceptionMessage + ex.Message);
+            }
+            catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
             return source;
         }
     }
